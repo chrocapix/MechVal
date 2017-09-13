@@ -53,24 +53,35 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"  >WIN32;_DEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;NDEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"    >_DEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"  >NDEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_DEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;_WINDOWS;_USRDLL;MechValCore_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Full</Optimization>
+      <CppLanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|x64'">gnu++1y</CppLanguageStandard>
+      <CppLanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">gnu++1y</CppLanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pouet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MechValCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MechValCore.h" />
+    <ClInclude Include="pouet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NLOpt\NLOpt.vcxproj">
+      <Project>{b07dcb95-eaac-4229-87fd-0a6873cd4e93}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

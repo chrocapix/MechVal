@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\api">
+      <UniqueIdentifier>{af6cfd69-90c4-4a02-bcd1-40a2bf74a1e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\api">
+      <UniqueIdentifier>{c227ec21-69ed-47ab-93e6-ddd986177576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{03df8c8b-c9ae-4034-95c3-3ccf9fe83293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\praxis">
+      <UniqueIdentifier>{58ad1241-f889-479b-95e6-587309b620a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cdirect">
+      <UniqueIdentifier>{49feae3a-81d4-4a55-b03f-d461ef9319eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\luksan">
+      <UniqueIdentifier>{ab0f8cfd-2b7d-455a-bf52-29743869d6c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\auglag">
+      <UniqueIdentifier>{6d23f1f8-186b-4d94-9c31-91d3d01f43f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bobyqa">
+      <UniqueIdentifier>{e04ce9ae-be8b-4fe7-9110-f10bf1f453d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cobyla">
+      <UniqueIdentifier>{b0e3c494-a445-4924-b08d-0c054410246c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\crs">
+      <UniqueIdentifier>{c4abb6cd-1080-47f4-9695-0daf8603827d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\esch">
+      <UniqueIdentifier>{9b99a338-095c-457a-a374-be2365f7f59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\isres">
+      <UniqueIdentifier>{1ee69b3d-aafe-4a74-87e2-623555023c96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mlsl">
+      <UniqueIdentifier>{8d38e181-ff4e-415a-8039-edcf0b08e634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mma">
+      <UniqueIdentifier>{881e29ff-6d6b-4ae2-bde2-5443607769c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\neldermead">
+      <UniqueIdentifier>{0fb74eb5-a5e4-4189-ae43-01ccf4982df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\newuoa">
+      <UniqueIdentifier>{34eff09f-b823-4d8a-8d43-b1c7bf78bbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\slsqp">
+      <UniqueIdentifier>{43f0ef5c-fb8a-4224-b6ea-d172939554cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\auglag">
+      <UniqueIdentifier>{6f8aa998-9a37-4ca1-9948-ec4488c4499f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\bobyqa">
+      <UniqueIdentifier>{be19893f-3a6d-4d54-a8fa-7732022e553f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cdirect">
+      <UniqueIdentifier>{acef6dd7-3aee-40be-8e9a-36d1fc01e473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cobyla">
+      <UniqueIdentifier>{3da8e365-ef35-4f69-8c1b-a2cde1b22726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\crs">
+      <UniqueIdentifier>{fa929005-972f-4c36-806a-2dbe2819e40e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\esch">
+      <UniqueIdentifier>{00ac800f-5474-4f84-8374-7c8954893be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\isres">
+      <UniqueIdentifier>{3b831947-e0f1-4f88-97a3-01a66789b072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\luksan">
+      <UniqueIdentifier>{07cac915-cf89-4678-91a4-a563e67d7903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mlsl">
+      <UniqueIdentifier>{d7e19813-f0eb-42e5-9919-979ac43a1757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mma">
+      <UniqueIdentifier>{80798914-372f-47c4-bd81-61735ec351b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\neldermead">
+      <UniqueIdentifier>{2def3c38-e464-43d7-ae5d-cdb1e6bfebc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\newuoa">
+      <UniqueIdentifier>{e2b24d80-8b42-4ffc-96f9-3f85ac9395a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\praxis">
+      <UniqueIdentifier>{fc3b8385-5278-4298-a5ba-f24cfbad4a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\slsqp">
+      <UniqueIdentifier>{057af9dd-56be-477a-a2b0-766942a6c70f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{1630f7c2-b3f5-4316-a997-f9f55a6ecf65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\nlopt-2.4.2\api\deprecated.c">
+      <Filter>Source Files\api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\api\general.c">
+      <Filter>Source Files\api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\api\optimize.c">
+      <Filter>Source Files\api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\api\options.c">
+      <Filter>Source Files\api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\auglag\auglag.c">
+      <Filter>Source Files\auglag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\bobyqa\bobyqa.c">
+      <Filter>Source Files\bobyqa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\cdirect\cdirect.c">
+      <Filter>Source Files\cdirect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\cdirect\hybrid.c">
+      <Filter>Source Files\cdirect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\cobyla\cobyla.c">
+      <Filter>Source Files\cobyla</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\crs\crs.c">
+      <Filter>Source Files\crs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\esch\esch.c">
+      <Filter>Source Files\esch</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\isres\isres.c">
+      <Filter>Source Files\isres</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\luksan\mssubs.c">
+      <Filter>Source Files\luksan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\luksan\plip.c">
+      <Filter>Source Files\luksan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\luksan\plis.c">
+      <Filter>Source Files\luksan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\luksan\pnet.c">
+      <Filter>Source Files\luksan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\luksan\pssubs.c">
+      <Filter>Source Files\luksan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\mlsl\mlsl.c">
+      <Filter>Source Files\mlsl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\mma\ccsa_quadratic.c">
+      <Filter>Source Files\mma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\mma\mma.c">
+      <Filter>Source Files\mma</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\neldermead\nldrmd.c">
+      <Filter>Source Files\neldermead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\neldermead\sbplx.c">
+      <Filter>Source Files\neldermead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\mt19937ar.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\qsort_r.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\redblack.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\redblack_test.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\rescale.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\sobolseq.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\stop.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\util\timer.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\slsqp\slsqp.c">
+      <Filter>Source Files\slsqp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\praxis\praxis.c">
+      <Filter>Source Files\praxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\nlopt-2.4.2\newuoa\newuoa.c">
+      <Filter>Source Files\newuoa</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\nlopt-2.4.2\api\nlopt.h">
+      <Filter>Header Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\api\nlopt.hpp">
+      <Filter>Header Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\api\nlopt-in.hpp">
+      <Filter>Header Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\api\nlopt-internal.h">
+      <Filter>Header Files\api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\util\nlopt-util.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\util\redblack.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\util\soboldata.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\praxis\praxis.h">
+      <Filter>Header Files\praxis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\cdirect\cdirect.h">
+      <Filter>Header Files\cdirect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\luksan\luksan.h">
+      <Filter>Header Files\luksan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\auglag\auglag.h">
+      <Filter>Header Files\auglag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\bobyqa\bobyqa.h">
+      <Filter>Header Files\bobyqa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\cobyla\cobyla.h">
+      <Filter>Header Files\cobyla</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\crs\crs.h">
+      <Filter>Header Files\crs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\esch\esch.h">
+      <Filter>Header Files\esch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\isres\isres.h">
+      <Filter>Header Files\isres</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\mlsl\mlsl.h">
+      <Filter>Header Files\mlsl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\mma\mma.h">
+      <Filter>Header Files\mma</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\neldermead\neldermead.h">
+      <Filter>Header Files\neldermead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\slsqp\slsqp.h">
+      <Filter>Header Files\slsqp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\nlopt-2.4.2\newuoa\newuoa.h">
+      <Filter>Header Files\newuoa</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\nlopt-2.4.2\luksan\plis.txt">
+      <Filter>Source Files\luksan</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

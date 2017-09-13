@@ -3,8 +3,11 @@
 
 ksp_install=/cygdrive/e/KSP/ksp-win64-1.2.2-mechval/KSP_win64
 
-bindir_cs=MechVal/MechVal/bin/Debug
-bindir_cpp=MechValCore/x64/Debug
+#bindir_cs=MechVal/MechVal/bin/Debug
+#bindir_cpp=MechValCore/x64/Debug
+#
+bindir_cs=MechVal/MechVal/bin/Release
+bindir_cpp=MechValCore/x64/Release
 
 #bindir_cs=MechVal/MechVal/bin/Release
 #

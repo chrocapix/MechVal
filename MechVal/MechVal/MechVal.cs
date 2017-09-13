@@ -14,7 +14,7 @@ namespace MechVal
 		[DllImport("MechValCore.dll")]
 		private static extern int fnMechValCore();
 
-		Boolean visible;
+		Boolean visible = false;
 
 		public ApplicationLauncherButton button;
 
@@ -33,7 +33,7 @@ namespace MechVal
 		{
 			button = ApplicationLauncher.Instance.AddModApplication(
 					SetWindowOpen,
-				SetWindowOpen,
+				SetWindowClose,
 			null,
 			null,
 			null,

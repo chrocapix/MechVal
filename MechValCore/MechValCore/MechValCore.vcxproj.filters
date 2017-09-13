@@ -18,6 +18,9 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pouet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MechValCore.cpp">
@@ -26,6 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MechValCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pouet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
