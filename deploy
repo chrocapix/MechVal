@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+
+ksp_install=/cygdrive/e/KSP/ksp-win64-1.2.2-mechval/KSP_win64
+
+bindir=MechVal/MechVal/bin/Debug
+#bindir=MechVal/MechVal/bin/Release
+
+
+echo Removing previous install
+rm -vfr $ksp_install/GameData/MechVal
+echo
+
+echo Installing current version
+cp -vfr GameData/MechVal  $ksp_install/GameData
+mkdir -p  $ksp_install/GameData/MechVal/Plugins
+cp -vfr $bindir/MechVal.dll  $ksp_install/GameData/MechVal/Plugins
+
+
