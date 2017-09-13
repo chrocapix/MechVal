@@ -4,10 +4,10 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MechVal Status">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MechVal\Window\BaseWindow.cs">
     <Files>
-      <File FileName="MechVal\MyClass.cs" Line="1" Column="1" />
-      <File FileName="MechVal Status" />
+      <File FileName="MechVal\MechVal.cs" Line="5" Column="1" />
+      <File FileName="MechVal\Window\BaseWindow.cs" Line="10" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

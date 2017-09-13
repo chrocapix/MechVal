@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using KSP.IO;
 using KSP.UI.Screens;
 using UnityEngine;
@@ -6,9 +7,13 @@ using UnityEngine;
 
 namespace MechVal
 {
+
 	[KSPAddon(KSPAddon.Startup.Flight, false)]
 	public class MechVal : MonoBehaviour
 	{
+		[DllImport("MechValCore.dll")]
+		private static extern int fnMechValCore();
+
 		Boolean visible;
 
 		public ApplicationLauncherButton button;
@@ -43,6 +48,8 @@ namespace MechVal
 			print("Mech_Val: open window");
 			visible = true;
 			print("Mech_Val: visible " + visible);
+
+			print("Mech_val_core says " + fnMechValCore());
 		}
 
 		private void SetWindowClose()
@@ -50,6 +57,7 @@ namespace MechVal
 			print("Mech_Val: close window");
 			visible = false;
 			print("Mech_Val: visible " + visible);
+			print("Mech_val_core says " + fnMechValCore());
 		}
 
 

@@ -36,8 +36,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
+    <Compile Include="MechVal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Window\BaseWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
