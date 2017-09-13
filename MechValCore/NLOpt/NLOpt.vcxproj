@@ -79,7 +79,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\src\MechVal\nlopt-2.4.2\slsqp;E:\src\MechVal\nlopt-2.4.2\newuoa;E:\src\MechVal\nlopt-2.4.2\neldermead;E:\src\MechVal\nlopt-2.4.2\mma;E:\src\MechVal\nlopt-2.4.2\mlsl;E:\src\MechVal\nlopt-2.4.2\luksan;E:\src\MechVal\nlopt-2.4.2\isres;E:\src\MechVal\nlopt-2.4.2\esch;E:\src\MechVal\nlopt-2.4.2\crs;E:\src\MechVal\nlopt-2.4.2\cobyla;E:\src\MechVal\nlopt-2.4.2\cdirect;E:\src\MechVal\nlopt-2.4.2\bobyqa;E:\src\MechVal\nlopt-2.4.2\auglag;E:\src\MechVal\nlopt-2.4.2\api;E:\src\MechVal\nlopt-2.4.2;E:\src\MechVal\nlopt-2.4.2\util;E:\src\MechVal\nlopt-2.4.2\praxis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\nlopt-2.4.2\slsqp;$(SolutionDir)..\nlopt-2.4.2\newuoa;$(SolutionDir)..\nlopt-2.4.2\neldermead;$(SolutionDir)..\nlopt-2.4.2\mma;$(SolutionDir)..\nlopt-2.4.2\mlsl;$(SolutionDir)..\nlopt-2.4.2\luksan;$(SolutionDir)..\nlopt-2.4.2\isres;$(SolutionDir)..\nlopt-2.4.2\esch;$(SolutionDir)..\nlopt-2.4.2\crs;$(SolutionDir)..\nlopt-2.4.2\cobyla;$(SolutionDir)..\nlopt-2.4.2\cdirect;$(SolutionDir)..\nlopt-2.4.2\bobyqa;$(SolutionDir)..\nlopt-2.4.2\auglag;$(SolutionDir)..\nlopt-2.4.2\api;$(SolutionDir)..\nlopt-2.4.2;$(SolutionDir)..\nlopt-2.4.2\util;$(SolutionDir)..\nlopt-2.4.2\praxis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
