@@ -1,0 +1,7 @@
+This is NLOpt 2.4.2, modified to compile under VS2017.
+The Makefiles and configure script are removed.
+I also had to remove stogo and the fortran-to-c converted direct algorithms,
+as I couldn't get them to compile with VS.
+
+See README.orig for the original NLOpt README.
+
