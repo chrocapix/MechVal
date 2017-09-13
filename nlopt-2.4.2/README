@@ -1,5 +1,7 @@
 This is NLOpt 2.4.2, modified to compile under VS2017.
 The Makefiles and configure script are removed.
+Some files were modified to remove compilation warning,
+mostly implicit double->int cast and signed/unsigned confusion.
 I also had to remove stogo and the fortran-to-c converted direct algorithms,
 as I couldn't get them to compile with VS.
 

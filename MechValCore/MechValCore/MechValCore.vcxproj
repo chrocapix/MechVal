@@ -60,6 +60,7 @@
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Full</Optimization>
       <CppLanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|x64'">gnu++1y</CppLanguageStandard>
       <CppLanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">gnu++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\src\MechVal\nlopt-2.4.2\api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
