@@ -39,6 +39,11 @@
     <Compile Include="MechVal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Window\BaseWindow.cs" />
+    <Compile Include="HeadingControl.cs" />
+    <Compile Include="KahanSum.cs" />
+    <Compile Include="PIDController.cs" />
+    <Compile Include="MvMath.cs" />
+    <Compile Include="AttitudeController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

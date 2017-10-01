@@ -15,8 +15,11 @@ namespace MechVal
 		private static extern int fnMechValCore();
 
 		Boolean visible = false;
+		HeadingControl headingCtrl = null;
 
 		public ApplicationLauncherButton button;
+
+		public static Vessel getVessel { get { return FlightGlobals.ActiveVessel; } }
 
 		public MechVal()
 		{
@@ -24,7 +27,11 @@ namespace MechVal
 
 		public void Start()
 		{
+			print("mech_val starting");
+			print("mech_val_core says " + fnMechValCore());
 			CreateButtonIcon();
+
+
 		}
 
 
@@ -38,26 +45,62 @@ namespace MechVal
 			null,
 			null,
 			null,
-			ApplicationLauncher.AppScenes.ALWAYS,
+				ApplicationLauncher.AppScenes.FLIGHT | ApplicationLauncher.AppScenes.MAPVIEW,
 			GameDatabase.Instance.GetTexture("MechVal/Textures/icon", false)
 			);
 		}
 
+		private void autopilotON()
+		{
+			if (headingCtrl != null) return;
+
+			headingCtrl = new HeadingControl();
+			headingCtrl.on();
+			getVessel.OnFlyByWire += new FlightInputCallback(fly);
+		}
+
+		private void autopilotOFF()
+		{
+			if (headingCtrl == null) return;
+
+			getVessel.OnFlyByWire -= new FlightInputCallback(fly);
+			headingCtrl = null;
+		}
+
+		private void fly(FlightCtrlState s)
+		{
+			headingCtrl.Drive(s);
+		}
+
 		private void SetWindowOpen()
 		{
-			print("Mech_Val: open window");
 			visible = true;
-			print("Mech_Val: visible " + visible);
+			print("mech_Val: open window " + visible);
 
-			print("Mech_val_core says " + fnMechValCore());
+			Vessel vessel = getVessel;
+
+			if (vessel == null)
+			{
+				print("mech_val: no vessel");
+			}
+			else
+			{
+				double mass = vessel.GetTotalMass();
+				String vesselName = vessel.GetName();
+
+				print("mech_val: vessel " + vesselName + ": mass " + mass + " deltav " + vessel.GetDeltaV() + " autopilot on");
+				autopilotON();
+			}
 		}
 
 		private void SetWindowClose()
 		{
-			print("Mech_Val: close window");
 			visible = false;
-			print("Mech_Val: visible " + visible);
-			print("Mech_val_core says " + fnMechValCore());
+			print("mech_Val: close window " + visible);
+			if (getVessel == null) return;
+
+			print("mech_val: disable autopilot");
+			autopilotOFF();
 		}
 
 
