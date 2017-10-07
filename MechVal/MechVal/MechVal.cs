@@ -14,10 +14,11 @@ namespace MechVal
 		[DllImport("MechValCore.dll")]
 		private static extern int fnMechValCore();
 
-		Boolean visible = false;
+		//	Boolean visible = false;
 		HeadingControl headingCtrl = null;
 
 		public ApplicationLauncherButton button;
+		public Window.BasicWindow basicWindow;
 
 		public static Vessel getVessel { get { return FlightGlobals.ActiveVessel; } }
 
@@ -30,8 +31,7 @@ namespace MechVal
 			print("mech_val starting");
 			print("mech_val_core says " + fnMechValCore());
 			CreateButtonIcon();
-
-
+			basicWindow = new Window.BasicWindow(this);
 		}
 
 
@@ -72,37 +72,57 @@ namespace MechVal
 			headingCtrl.Drive(s);
 		}
 
+		private void OnGUI()
+		{
+			basicWindow.drawGUI();
+		}
+
 		private void SetWindowOpen()
 		{
-			visible = true;
-			print("mech_Val: open window " + visible);
+			//visible = true;
+			basicWindow.WindowVisible = true;
+			Mesg("open");
+			//			print("mech_Val: open window " + basicWindow.WindowVisible);
+			//			print("mech_val: " + basicWindow.guiCalls +  "gui calls");
 
 			Vessel vessel = getVessel;
 
 			if (vessel == null)
 			{
-				print("mech_val: no vessel");
+				//				print("mech_val: no vessel");
 			}
 			else
 			{
 				double mass = vessel.GetTotalMass();
 				String vesselName = vessel.GetName();
 
-				print("mech_val: vessel " + vesselName + ": mass " + mass + " deltav " + vessel.GetDeltaV() + " autopilot on");
+				//				print("mech_val: vessel " + vesselName + ": mass " + mass + " deltav " + vessel.GetDeltaV() + " autopilot on");
 				autopilotON();
 			}
 		}
 
 		private void SetWindowClose()
 		{
-			visible = false;
-			print("mech_Val: close window " + visible);
+			//visible = false;
+			basicWindow.WindowVisible = false;
+			//			print("mech_Val: close window " + basicWindow.WindowVisible);
+			Mesg("close");
 			if (getVessel == null) return;
 
-			print("mech_val: disable autopilot");
+			//			print("mech_val: disable autopilot");
 			autopilotOFF();
 		}
 
+		private void Mesg(string operation)
+		{
+			print("mech_val: " + basicWindow.guiCalls + " gui calls after " + operation);
+		}
+
+		public void OnDestroy()
+		{
+			ApplicationLauncher.Instance.RemoveModApplication(button);
+			Mesg("destroy");
+		}
 
 	}
 }

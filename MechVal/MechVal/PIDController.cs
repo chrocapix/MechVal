@@ -37,8 +37,8 @@ namespace MechVal
 		{
 			timePrev = Planetarium.fetch.time;
 			errorPrev = 0;
-			derv = 0;
 			intg.Set(0);
+			derv = 0;
 		}
 
 		public double Update(double error)
@@ -51,8 +51,8 @@ namespace MechVal
 			double h = Math.Max(time - timePrev, TimeWarp.fixedDeltaTime);
 
 			double prop = kProp * error;
-			// filtering the derivative
-			derv = tFilt / (tFilt + h) * derv + kDerv / (tFilt + h) * (error - errorPrev);
+			// filter the derivative
+			derv = (tFilt / (tFilt + h)) * derv + (kDerv / (tFilt + h)) * (error - errorPrev);
 			double requestedAction = prop + intg.value + derv;
 
 			// clamp the action to [-1,1] and do windup protection on intg
