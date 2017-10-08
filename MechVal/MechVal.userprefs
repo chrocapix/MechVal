@@ -6,13 +6,12 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="MechVal Status">
     <Files>
-      <File FileName="MechVal\MechVal.cs" Line="22" Column="80" />
-      <File FileName="MechVal\Window\BaseWindow.cs" Line="29" Column="2" />
-      <File FileName="MechVal\HeadingControl.cs" Line="23" Column="4" />
-      <File FileName="MechVal\KahanSum.cs" Line="18" Column="10" />
-      <File FileName="MechVal\PIDController.cs" Line="61" Column="1" />
+      <File FileName="MechVal\MechVal.cs" Line="58" Column="4" />
+      <File FileName="MechVal\AttitudeController.cs" Line="11" Column="28" />
+      <File FileName="MechVal\Window\BaseWindow.cs" Line="57" Column="37" />
+      <File FileName="MechVal\PIDController.cs" Line="11" Column="1" />
       <File FileName="MechVal\MvMath.cs" Line="6" Column="17" />
-      <File FileName="MechVal\AttitudeController.cs" Line="41" Column="3" />
+      <File FileName="MechVal Status" />
       <File FileName="MechVal Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>

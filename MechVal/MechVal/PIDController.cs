@@ -3,11 +3,11 @@ namespace MechVal
 {
 	public class PIDController
 	{
-		readonly double kProp;
-		readonly double kIntg;
-		readonly double kDerv;
-		readonly double kWind;
-		readonly double tFilt;
+		double kProp;
+		double kIntg;
+		double kDerv;
+		double kWind;
+		double tFilt;
 
 		// using Kahan summation on the integral, just in case
 		readonly KahanSum intg = new KahanSum();
@@ -23,6 +23,16 @@ namespace MechVal
 		}
 
 		public PIDController(double kProp, double kIntg, double kDerv, double kWind, double tFilt)
+		{
+			Set(kProp, kIntg, kDerv, kWind, tFilt);
+		}
+
+		public void Set(double kProp, double kIntg, double kDerv)
+		{
+			Set(kProp, kIntg, kDerv, Math.Sqrt(kIntg / kDerv), kDerv / kProp / 3);
+		}
+
+		public void Set(double kProp, double kIntg, double kDerv, double kWind, double tFilt)
 		{
 			this.kProp = kProp;
 			this.kIntg = kIntg;

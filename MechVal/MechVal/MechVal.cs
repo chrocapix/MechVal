@@ -15,7 +15,11 @@ namespace MechVal
 		private static extern int fnMechValCore();
 
 		//	Boolean visible = false;
-		HeadingControl headingCtrl = null;
+		public AttitudeController attitude = new AttitudeController();
+
+		public double lastYaw;
+		public double lastPitch;
+		public double lastRoll;
 
 		public ApplicationLauncherButton button;
 		public Window.BasicWindow basicWindow;
@@ -52,24 +56,21 @@ namespace MechVal
 
 		private void autopilotON()
 		{
-			if (headingCtrl != null) return;
-
-			headingCtrl = new HeadingControl();
-			headingCtrl.on();
+			attitude.Reset();
 			getVessel.OnFlyByWire += new FlightInputCallback(fly);
 		}
 
 		private void autopilotOFF()
 		{
-			if (headingCtrl == null) return;
-
 			getVessel.OnFlyByWire -= new FlightInputCallback(fly);
-			headingCtrl = null;
 		}
 
 		private void fly(FlightCtrlState s)
 		{
-			headingCtrl.Drive(s);
+			attitude.Drive(s);
+			lastYaw = s.yaw;
+			lastPitch = s.pitch;
+			lastRoll = s.roll;
 		}
 
 		private void OnGUI()

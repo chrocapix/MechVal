@@ -19,9 +19,13 @@ namespace MechVal.Window
 			this.mechVal = mechVal;
 		}
 
-		protected void ItemLabel(string labelText)
+		protected void ItemLabel(string labelText, int num)
 		{
-			GUILayout.Label(labelText, GUILayout.ExpandWidth(false), GUILayout.Width(pos.width / 2));
+			GUILayout.Label(labelText, GUILayout.ExpandWidth(false), GUILayout.Width(.9f * pos.width / num));
+		}
+		protected void TextField(string labelText, int num)
+		{
+			GUILayout.TextField(labelText, GUILayout.Width(.9f * pos.width / num));
 		}
 
 		public virtual void WindowGUI(int id)
@@ -32,14 +36,48 @@ namespace MechVal.Window
 				WindowVisible = false;
 			}
 			GUI.DragWindow(new Rect(0, 0, 10000, 20));
+			double yaw, pitch, roll;
+			mechVal.attitude.computeErrors(out yaw, out pitch, out roll);
 
 			GUILayout.BeginVertical();
+
 			GUILayout.BeginHorizontal();
-
-			ItemLabel("Pouet");
-			GUILayout.TextField(string.Format("{0:0.0}", 42), GUILayout.Width(60));
-
+			ItemLabel("", 4);
+			ItemLabel("mul", 4);
+			ItemLabel("error", 4);
+			ItemLabel("cmd", 4);
 			GUILayout.EndHorizontal();
+
+
+			GUILayout.BeginHorizontal();
+			ItemLabel("yaw ", 4);
+			TextField(string.Format("{0:0.0}", mechVal.attitude.yawMul), 4);
+			TextField(string.Format("{0:0.0}", yaw), 4);
+			TextField(string.Format("{0:0.000}", mechVal.lastYaw), 4);
+			GUILayout.EndHorizontal();
+
+			GUILayout.BeginHorizontal();
+			ItemLabel("pitch", 4);
+			TextField(string.Format("{0:0.0}", mechVal.attitude.pitchMul), 4);
+			TextField(string.Format("{0:0.0}", pitch), 4);
+			TextField(string.Format("{0:0.000}", mechVal.lastPitch), 4);
+			GUILayout.EndHorizontal();
+
+			GUILayout.BeginHorizontal();
+			ItemLabel("roll", 4);
+			TextField(string.Format("{0:0.0}", mechVal.attitude.rollMul), 4);
+			TextField(string.Format("{0:0.0}", roll), 4);
+			TextField(string.Format("{0:0.000}", mechVal.lastRoll), 4);
+			GUILayout.EndHorizontal();
+
+			GUILayout.BeginHorizontal();
+			ItemLabel("PID", 4);
+			TextField(string.Format("{0:0.0}", mechVal.attitude.kProp), 4);
+			TextField(string.Format("{0:0.0}", mechVal.attitude.kIntg), 4);
+			TextField(string.Format("{0:0.0}", mechVal.attitude.kDerv), 4);
+			GUILayout.EndHorizontal();
+
+
 			GUILayout.EndVertical();
 
 		}

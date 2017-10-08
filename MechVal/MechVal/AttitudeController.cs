@@ -7,18 +7,26 @@ namespace MechVal
 	{
 		public static Vessel vessel { get { return FlightGlobals.ActiveVessel; } }
 
+		public double yawMul = 1;
+		public double pitchMul = 1;
+		public double rollMul = 1;
+
+		public double kProp = 1;
+		public double kIntg = .5;
+		public double kDerv = 1;
+
 		readonly PIDController yaw;
 		readonly PIDController pitch;
 		readonly PIDController roll;
 
+		public double yawAction;
+		public double pitchAction;
+		public double rollAction;
+
 		public QuaternionD attitude = QuaternionD.identity;
 
-		public AttitudeController()
-			: this(1, .5, 1)
-		{
-		}
 
-		public AttitudeController(double kProp, double kIntg, double kDerv)
+		public AttitudeController()
 		{
 			yaw = new PIDController(kProp, kIntg, kDerv);
 			pitch = new PIDController(kProp, kIntg, kDerv);
@@ -32,7 +40,25 @@ namespace MechVal
 			roll.Reset();
 		}
 
-		public void computeAngles(out double yawError, out double pitchError, out double rollError)
+		public void SetMultiplier(double yawMul, double pitchMul, double rollMul)
+		{
+			this.yawMul = yawMul;
+			this.pitchMul = pitchMul;
+			this.rollMul = rollMul;
+
+			UpdateParameters();
+		}
+
+		public void UpdateParameters()
+		{
+			yaw.Set(yawMul * kProp, yawMul * kIntg, yawMul * kDerv);
+			pitch.Set(pitchMul * kProp, pitchMul * kIntg, pitchMul * kDerv);
+			roll.Set(rollMul * kProp, rollMul * kIntg, rollMul * kDerv);
+
+			Reset();
+		}
+
+		public void computeErrors(out double yawError, out double pitchError, out double rollError)
 		{
 			// This is shamelessly ripped off from MechJeb2.
 			// TODO: Understand it and make sure I didn't screw it up.
@@ -42,8 +68,8 @@ namespace MechVal
 
 			double angle = Math.Abs(Vector3d.Angle(Vector3d.up, targetUp));
 
-			yawError = -targetUp.z;
-			pitchError = targetUp.x;
+			yawError = targetUp.x;
+			pitchError = -targetUp.z;
 			{
 				// Numerically safe normalization of the 2D vector (yawError, pitchError)
 				double normLinf = Math.Max(Math.Abs(yawError), Math.Abs(pitchError));
@@ -72,16 +98,16 @@ namespace MechVal
 		public void Drive(FlightCtrlState s)
 		{
 			double yawError, pitchError, rollError;
-			computeAngles(out yawError, out pitchError, out rollError);
+			computeErrors(out yawError, out pitchError, out rollError);
 			Drive(s, yawError, pitchError, rollError);
 		}
 
 
 		public void Drive(FlightCtrlState s, double yawError, double pitchError, double rollError)
 		{
-			s.yaw = (float)yaw.Update(yawError);
-			s.pitch = (float)pitch.Update(pitchError);
-			s.roll = (float)roll.Update(rollError);
+			s.yaw = (float)(yawAction = yaw.Update(yawError));
+			s.pitch = (float)(pitchAction = pitch.Update(pitchError));
+			s.roll = (float)(rollAction = roll.Update(rollError));
 		}
 	}
 }
