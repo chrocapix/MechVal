@@ -225,6 +225,15 @@ struct scalar : detail::operators<double, scalar> {
     }
     explicit operator double () const { return v; }
 
+    // clang-format off
+    friend bool operator== (scalar a, scalar b) { return a.v == b.v; }
+    friend bool operator!= (scalar a, scalar b) { return a.v != b.v; }
+    friend bool operator<  (scalar a, scalar b) { return a.v <  b.v; }
+    friend bool operator<= (scalar a, scalar b) { return a.v <= b.v; }
+    friend bool operator>  (scalar a, scalar b) { return a.v >  b.v; }
+    friend bool operator>= (scalar a, scalar b) { return a.v >= b.v; }
+    // clang-format on
+
   private:
     double v;
 };
@@ -286,6 +295,10 @@ struct vect3d {
         : v{widen4 (x)}
     {
     }
+    vect3d (double x, double y, double z)
+        : v{x, y, z, 0}
+    {
+    }
     explicit vect3d (scalar x)
         : vect3d{double(x)}
     {
@@ -294,6 +307,16 @@ struct vect3d {
         : v{v}
     {
     }
+
+    scalar x () const { return v[0]; }
+    scalar y () const { return v[1]; }
+    scalar z () const { return v[2]; }
+
+    friend bool operator== (vect3d a, vect3d b)
+    {
+        return a.x () == b.x () && a.y () == b.y () && a.z () == b.z ();
+    }
+    friend bool operator!= (vect3d a, vect3d b) { return !(a == b); }
 
     friend vect3d operator- (vect3d a) { return -a.v; }
     friend vect3d operator- (vect3d a, vect3d b) { return a.v - b.v; }
