@@ -8,6 +8,7 @@ namespace math
 {
 
 typedef __m128d v2d;
+typedef __m128 v4f;
 typedef __m256d v4d;
 
 static inline v2d widen2 (double a) { return {a, a}; }
@@ -30,6 +31,19 @@ static inline v4d    sqrt (v4d    a) { return _mm256_sqrt_pd (a); }
 #else
 static inline v4d    sqrt (v4d    a) { return pack (sqrt (lo (a)), sqrt (hi (a))); }
 #endif
+
+static inline float  rsqrt (float a) { return _mm_rsqrt_ss (v4f{a})[0]; }
+static inline v4f    rsqrt (v4f   a) { return _mm_rsqrt_ps (a); }
+
+static inline double rsqrt (double a) { return double (rsqrt (float (a))); }
+static inline v2d    rsqrt (v2d    a) {
+    v4f r = rsqrt (v4f{float (a[0]), float (a[1])});
+    return { r[0], r[1] };
+}
+static inline v4d    rsqrt (v4d    a) {
+    v4f r = rsqrt (v4f{float (a[0]), float (a[1]), float (a[2]), float (a[3])});
+    return { r[0], r[1], r[2], r[3] };
+}
 
 static inline double max (double a, double b) { return std::max (a, b); }
 static inline v2d    max (v2d    a, v2d    b) { return _mm_max_pd (a, b); }
@@ -100,10 +114,13 @@ template <typename N, typename T> struct operators {
 
     // clang-format off
     
-    friend T sqrt (T a) { return sqrt (N (a)); }
-    friend T abs (T a) { return abs (N (a)); }
+    friend T  sqrt (T a) { return  sqrt (N (a)); }
+    friend T rsqrt (T a) { return rsqrt (N (a)); }
+    friend T   abs (T a) { return   abs (N (a)); }
+
     friend T min (T a, T b) { return min (N (a), N (b)); }
     friend T max (T a, T b) { return max (N (a), N (b)); }
+
     friend double hmin (T a) { return hmin (N (a)); }
     friend double hmax (T a) { return hmax (N (a)); }
     friend double hadd (T a) { return hadd (N (a)); }
@@ -144,6 +161,7 @@ template <typename T> struct pack_operators {
 
     // clang-format off
     friend T sqrt (const T &a) { return {sqrt (lo(a)), sqrt(hi(a))}; }
+    friend T rsqrt (const T &a) { return {rsqrt (lo(a)), rsqrt(hi(a))}; }
     friend T abs (const T &a) { return {abs (lo(a)), abs(hi(a))}; }
     friend T min (const T &a, const T &b) { return {min (lo (a), lo (b)), min (hi (a), hi (b))}; }
     friend T max (const T &a, const T &b) { return {max (lo (a), lo (b)), max (hi (a), hi (b))}; }
@@ -245,6 +263,10 @@ struct pack2d : detail::operators<v2d, pack2d> {
         : v{widen2 (v)}
     {
     }
+    pack2d (double v1, double v2)
+        : v{v1, v2}
+    {
+    }
     pack2d (scalar v)
         : pack2d{double(v)}
     {
@@ -258,6 +280,7 @@ struct pack2d : detail::operators<v2d, pack2d> {
     {
     }
     operator v2d () const { return v; }
+    scalar operator[] (int i) const { return v[i]; }
 
   private:
     v2d v;
@@ -283,6 +306,7 @@ struct pack4d : detail::operators<v4d, pack4d> {
     {
     }
     operator v4d () const { return v; }
+    scalar operator[] (int i) const { return v[i]; }
 
   private:
     v4d v;

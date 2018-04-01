@@ -1,6 +1,7 @@
 CXXFLAGS += -std=c++1z
 #CXXFLAGS += -stdlib=libc++
 # LDFLAGS += -stdlib=libc++
+CXXFLAGS += -I/usr/local/include
 CXXFLAGS += -Werror
 CXXFLAGS += -Wall -Wextra -Wpedantic -Wconversion
 CXXFLAGS += -Wfatal-errors
@@ -13,11 +14,15 @@ CXXFLAGS += -mfma
 CXX = clang++
  LD = clang++
 
-.PHONY: clean dep test_math \
+.PHONY: clean dep test_math default \
 	test_pack test_vect \
 	test_x64 test_avx test_fma \
 	do_test_pack_x64 do_test_pack_avx do_test_pack_fma \
 	do_test_vect_x64 do_test_vect_avx do_test_vect_fma 
+
+default:
+
+dp_exp.exe: dp_exp.o
 
 
 test_math: test_vect test_pack

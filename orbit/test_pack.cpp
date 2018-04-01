@@ -20,6 +20,8 @@ using math::scalar;
 using math::pack2d;
 using math::pack4d;
 
+using math::rsqrt;
+
 using math::min;
 using math::max;
 
@@ -485,6 +487,7 @@ template <typename S, typename P> void test_pack_sp (const P *data)
 
     TEST1 (a)
     TEST1 (sqrt (a))
+    TEST1 (rsqrt (a))
     TEST1 (abs (a))
     TEST1 (square (a))
     TEST1 (-a)
