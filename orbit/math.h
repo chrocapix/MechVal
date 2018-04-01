@@ -303,6 +303,10 @@ struct vect3d {
         : vect3d{double(x)}
     {
     }
+    explicit vect3d (scalar::M m)
+        : vect3d{scalar (m)}
+    {
+    }
     vect3d (v4d v)
         : v{v}
     {
@@ -318,19 +322,40 @@ struct vect3d {
     }
     friend bool operator!= (vect3d a, vect3d b) { return !(a == b); }
 
+    struct M {
+        v4d a;
+        v4d b;
+        operator vect3d () const { return a * b; }
+    };
+
     friend vect3d operator- (vect3d a) { return -a.v; }
-    friend vect3d operator- (vect3d a, vect3d b) { return a.v - b.v; }
+
+    friend vect3d operator+ (M a, vect3d b) { return muladd (a.a, a.b, b.v); }
+    friend vect3d operator+ (M a, M b) { return a + vect3d (b); }
+    friend vect3d operator+ (vect3d a, M b) { return b + a; }
     friend vect3d operator+ (vect3d a, vect3d b) { return a.v + b.v; }
-    friend vect3d operator* (scalar a, vect3d b)
+
+    friend vect3d operator- (M a, vect3d b) { return mulsub (a.a, a.b, b.v); }
+    friend vect3d operator- (M a, M b) { return a - vect3d (b); }
+    friend vect3d operator- (vect3d a, M b)
     {
-        return widen4 (double(a)) * b.v;
+        return negmuladd (b.a, b.b, a.v);
     }
-    friend vect3d operator* (vect3d a, scalar b) { return b * a; }
+    friend vect3d operator- (vect3d a, vect3d b) { return a.v - b.v; }
+
+    friend M operator* (vect3d a, scalar b)
+    {
+        return {a.v, widen4 (double(b))};
+    }
+    friend M operator* (scalar a, vect3d b) { return b * a; }
+
     friend vect3d operator/ (vect3d a, scalar b)
     {
         return a.v / widen4 (double(b));
     }
+
     friend scalar operator* (vect3d a, vect3d b) { return hadd3 (a.v * b.v); }
+    friend scalar square (vect3d a) { return a * a; }
     friend vect3d operator^ (vect3d a, vect3d b)
     {
         return mulsub (yzx (a.v), zxy (b.v), yzx (b.v) * zxy (a.v));
