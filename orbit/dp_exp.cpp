@@ -1,21 +1,27 @@
-#include <iostream>
 
 #include "dopri5.h"
+#include <iostream>
 
 #include <util/getarg.h>
 
 using math::scalar;
 
-struct f {
-    scalar operator() (scalar, scalar y, bool) const { return y; }
-};
-
 struct state {
     double t;
     scalar y;
     scalar dy;
+    void set (double t1, scalar y1, scalar dy1)
+    {
+        t  = t1;
+        y  = y1;
+        dy = dy1;
+    }
     double t_next;
     bool u;
+};
+
+struct f {
+    scalar operator() (scalar, scalar y, bool) const { return y; }
 };
 
 int main (int, char *argv[])
@@ -26,7 +32,7 @@ int main (int, char *argv[])
     getarg (argv[1], y0);
     getarg (argv[2], tf);
 
-    dopri5<f> dp;
+    dopri5<f> dp{f (), {0.0000001}};
 
     state s;
     dp.init (s, y0, 0, 1, false);

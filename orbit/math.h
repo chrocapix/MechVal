@@ -212,12 +212,12 @@ template <typename T> struct pack_operators {
     hi_type hi_name;                                                           \
                                                                                \
     type () = default;                                                         \
-    type (scalar x)                                                            \
+    type (math::scalar x)                                                      \
         : type (double(x))                                                     \
     {                                                                          \
     }                                                                          \
-    type (scalar::M x)                                                         \
-        : type (scalar (x))                                                    \
+    type (math::scalar::M x)                                                   \
+        : type (math::scalar (x))                                              \
     {                                                                          \
     }                                                                          \
     type (double x)                                                            \
@@ -267,6 +267,10 @@ struct pack2d : detail::operators<v2d, pack2d> {
         : v{v1, v2}
     {
     }
+    pack2d (scalar v1, scalar v2)
+        : v{double(v1), double(v2)}
+    {
+    }
     pack2d (scalar v)
         : pack2d{double(v)}
     {
@@ -291,6 +295,14 @@ struct pack4d : detail::operators<v4d, pack4d> {
     pack4d () = default;
     pack4d (double v)
         : v{widen4 (v)}
+    {
+    }
+    pack4d (double v1, double v2, double v3, double v4)
+        : v{v1, v2, v3, v4}
+    {
+    }
+    pack4d (scalar v1, scalar v2, scalar v3, scalar v4)
+        : v{double(v1), double(v2), double(v3), double(v4)}
     {
     }
     pack4d (scalar v)
@@ -335,6 +347,13 @@ struct vect3d {
         : v{v}
     {
     }
+    explicit vect3d (pack4d x)
+        : v{v4d (x)}
+    {
+    }
+
+    explicit operator pack4d () const { return v; }
+    explicit operator v4d () const { return v; }
 
     scalar x () const { return v[0]; }
     scalar y () const { return v[1]; }
@@ -384,6 +403,9 @@ struct vect3d {
     {
         return mulsub (yzx (a.v), zxy (b.v), yzx (b.v) * zxy (a.v));
     }
+    friend vect3d operator*= (vect3d &a, scalar b) { return a = a * b; }
+    friend vect3d operator+= (vect3d &a, vect3d b) { return a = a + b; }
+    friend vect3d operator-= (vect3d &a, vect3d b) { return a = a - b; }
 
   private:
     static v4d yzx (v4d a) { return {a[1], a[2], a[0], a[3]}; }

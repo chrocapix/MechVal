@@ -38,6 +38,7 @@ template <typename Function, typename Error = error_diff> struct dopri5 {
         s0.y      = y0;
         s0.dy     = f (t0, y0, u);
         s0.t_next = s0.t + h_init (s0, t1, u);
+        s0.u      = u;
     }
 
     template <typename State> double step (State &s1, const State &s0) const
@@ -67,9 +68,11 @@ template <typename Function, typename Error = error_diff> struct dopri5 {
         // std::cout << "y0 = " << double(s0.y) << "\n";
         // std::cout << "dy0 = " << double(s0.dy) << "\n";
         double ridnf = error (s0.dy, s0.y, s0.y); // ridnf == dnf**-.5
-        // std::cerr << "ridnf = " << ridnf << "\n";
+        // std::cerr << "ridnf = " << ridnf << " dnf = " << 1. / (ridnf * ridnf)
+        // << "\n";
         double ridny = error (s0.y, s0.y, s0.y); //  ridny == dny**-.5
-        // std::cerr << "ridny = " << ridny << "\n";
+        // std::cerr << "ridny = " << ridny << " dny = " << 1. / (ridny * ridny)
+        // << "\n";
 
         double h;
         if (ridnf > 1e5 || ridny > 1e5) // dnf || dny < 1e-10
@@ -84,11 +87,12 @@ template <typename Function, typename Error = error_diff> struct dopri5 {
         Y dy1 = f (s0.t + h, s0.y + h * s0.dy, u);
         // std::cout << "dy1 = " << double(dy1) << "\n";
         double ider2 = error (dy1 - s0.dy, s0.y, s0.y) * h; // 1. / der2
-        // std::cerr << "ider2 = " << ider2 << "\n";
+        // std::cerr << "ider2 = " << ider2 << " der2 = " << 1. / ider2 << "\n";
 
         double ider12 =
             math::min (math::abs (ider2), ridnf); // 1 / max (|der2|, sqrt(dnf))
-        // std::cerr << "ider12 = " << ider12 << "\n";
+        // std::cerr << "ider12 = " << ider12 << " der12 = " << 1. / ider12
+        // << "\n";
 
         double h1;
         if (ider12 >= 1e15) // der12 <= 1e-15
@@ -120,9 +124,10 @@ template <typename Function, typename Error = error_diff> struct dopri5 {
             // << " ]  crit " << crit << " ratio " << ratio << "\n";
 
             if (dopri5_likely (force || crit >= 1 || std::abs (h) <= h_min)) {
-                s1.t      = t1;
-                s1.y      = y1;
-                s1.dy     = dy1;
+                s1.set (t1, y1, dy1);
+                // s1.t      = t1;
+                // s1.y      = y1;
+                // s1.dy     = dy1;
                 s1.t_next = t1 + h_next;
                 // std::cerr << "  accept h " << h << " -> " << h_next << " [ "
                 // << h_min << " " << h_max << " ]...\n";
