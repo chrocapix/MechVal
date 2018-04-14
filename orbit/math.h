@@ -24,6 +24,8 @@ static inline double abs (double a) { return std::abs (a); }
 static inline v2d    abs (v2d    a) { return {std::abs (a[0]), std::abs (a[1])}; }
 static inline v4d    abs (v4d    a) { return {std::abs (a[0]), std::abs (a[1]), std::abs (a[2]), std::abs (a[3])}; }
 
+static inline double sign (double a) { return a < 0 ? -1 : a > 0 ? 1 : a; }
+
 static inline double sqrt (double a) { return _mm_sqrt_sd (v2d{a}, v2d{a})[0]; }
 static inline v2d    sqrt (v2d    a) { return _mm_sqrt_pd (a); }
 #ifdef __AVX__
@@ -242,6 +244,8 @@ struct scalar : detail::operators<double, scalar> {
     {
     }
     explicit operator double () const { return v; }
+
+    friend scalar sign (scalar a) { return sign (a.v); }
 
     // clang-format off
     friend bool operator== (scalar a, scalar b) { return a.v == b.v; }

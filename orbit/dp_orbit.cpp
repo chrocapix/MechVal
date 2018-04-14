@@ -1,6 +1,7 @@
+#include <iostream>
+
 #include "ship.h"
 #include "simulator.h"
-#include <iostream>
 
 #include <util/getarg.h>
 
@@ -36,7 +37,7 @@ int main (int, char *argv[])
     // std::cout << "v0 " << double(v0.x ()) << " " << double(v0.y ()) << " "
     //<< double(v0.z ()) << "\n";
 
-    vship::state y0{ship::simple_state{r0, v0, 0},
+    vship::state y0{ship::simple_state{r0, v0, 1.},
                     ship::simple_state{vect3d{0}, vect3d{0}, 0}};
 
     ship::deriv f;

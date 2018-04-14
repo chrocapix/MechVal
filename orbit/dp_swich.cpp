@@ -35,8 +35,9 @@ std::ostream &operator<< (std::ostream &os, printer<simulator<Ship>> sim)
               << x << " " << y << " "     // 2 3
               << prx << " " << pry << " " // 4 5
               << pvx << " " << pvy << " " // 6 7
-              << double(s.y.p.m ()) << " " << s.swich << " "
-              << s.d_swich; // 8 9 10
+              << double(s.y.x.m ()) << " " << s.swich << " "
+              << s.d_swich   // 8 9 10
+              << " " << s.u; // 11
 }
 
 int main (int, char *argv[])
@@ -70,15 +71,26 @@ int main (int, char *argv[])
     vect3d pr0 = r0 / sqrt (square (r0));
     vect3d pv0 = v0 / sqrt (square (v0));
 
-    pr0 *= sqrt (.5) + (1 - sqrt (.5)) * std::pow (.75, std::pow (ap, 5. / 3));
+    {
+        double dv = v_pe - 1.;
+        pr0 *= 1. - .5 * dv * dv * (3. + dv);
+
+        // pr0 *= 1 - 1e-3;
+        // pr0 *=
+        // sqrt (.5) + (1 - sqrt (.5)) * std::pow (.75, std::pow (ap, 5. / 3));
+        // pr0 *= 1.1;
+    }
 
     ship::deriv f;
     ship::error e{tol};
-    vship::state y0{ship::simple_state{r0, v0, 1},
+    vship::state y0{ship::simple_state{r0, v0, 10},
                     ship::simple_state{pr0, pv0, 0}};
-    y0.p.set_m (f.pm_for_swich (y0, swich0));
+    std::cerr << "pm = " << double(y0.p.m ()) << " ... \n";
 
-    simulator<vship> sim{vship{f, e}, y0, 0, tf, 0.};
+    y0.p.set_m (f.pm_for_swich (y0, swich0));
+    std::cerr << "pm = " << double(y0.p.m ()) << " !\n";
+
+    simulator<vship> sim{vship{f, e}, y0, 0, tf};
 
     for (sim.set_t_final (tf); sim; ++sim) {
 

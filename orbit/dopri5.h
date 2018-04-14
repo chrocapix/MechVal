@@ -135,8 +135,11 @@ template <typename Function, typename Error = error_diff> struct dopri5 {
                 return crit;
             }
 
-            // std::cerr << "  reject h " << h << " -> " << h_next << " [ "
-            // << h_min << " " << h_max << " ]...\n";
+            // if (math::abs (h) == h_min) {
+            // std::cerr << "t = " << s0.t << "  reject h " << h << " -> "
+            //<< h_next << " [ " << h_min << " " << h_max
+            //<< " ] crit " << crit << " ratio " << ratio << "\n";
+            //}
             h  = h_next;
             t1 = s0.t + h;
         }

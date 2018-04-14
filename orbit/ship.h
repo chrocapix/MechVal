@@ -23,7 +23,13 @@ struct simple_state : math::pack_operators<simple_state> {
     math::vect3d v () const { return math::vect3d{v_m}; }
     math::scalar m () const { return v_m[3]; }
 
-    void set_m (math::scalar m1) { v_m[3] = m1; }
+    void set_m (math::scalar m1)
+    {
+        std::cerr << "set_m " << double(m1) << "\n";
+        v_m = pack (v (), m1);
+        std::cerr << "set_m v_m[3] " << double(v_m[3]) << "\n";
+        std::cerr << "set_m m() " << double(m ()) << "\n";
+    }
 
     static math::pack4d pack (math::vect3d v, math::scalar m)
     {
@@ -40,10 +46,11 @@ struct state : math::pack_operators<state> {
 struct deriv {
 
     double thrust    = 1.;
-    double mass_rate = 1.;
+    double mass_rate = 8.;
 
-    state operator() (math::scalar /*t*/, const state &y, double throttle) const
+    state operator() (math::scalar, const state &y, double throttle) const
     {
+        // std::cerr << "f (" << double(t) << " " << throttle << ")\n";
 
         using math::scalar;
         using math::vect3d;
@@ -63,14 +70,26 @@ struct deriv {
         scalar dpm = 0;
 
         if (throttle > 0) {
-            std::cerr << "throttle " << throttle << "!\n";
+            // std::cerr << "throttle " << throttle << " thrust " << thrust
+            // << " mass_rate " << mass_rate << "\n";
             scalar pv  = sqrt (square (y.p.v ()));
             vect3d pv_ = y.p.v () / pv;
 
-            dxv += thrust * throttle / y.x.m () * pv_;
-            dxm -= throttle * mass_rate;
+            // std::cerr << "pv_ " << double(pv_.x ()) << " " << double(pv_.y
+            // ())
+            // << " " << double(pv_.z ()) << "\n";
+            // std::cerr << " pv " << double(y.p.v ().x ()) << " "
+            // << double(y.p.v ().y ()) << " " << double(y.p.v ().z ())
+            // << "\n";
 
-            dpm -= pv * thrust / square (y.x.m ()) * throttle;
+            dxv += thrust * throttle / y.x.m () * pv_;
+            // std::cerr << "dv " << double(dxv.x ()) << " " << double(dxv.y ())
+            // << " " << double(dxv.z ()) << "\n";
+            dxm -= throttle * mass_rate;
+            // std::cerr << "dm " << double(dxm) << "\n";
+
+            dpm += pv * thrust / square (y.x.m ()) * throttle;
+            // std::cerr << "dpm " << double(dpm) << "\n";
         }
 
         return {{dxr, dxv, dxm}, {dpr, dpv, dpm}};
@@ -128,13 +147,36 @@ struct error {
         }
         static math::pack2d compute_m (const state &y)
         {
-            return sqrt (math::pack2d{y.x.m (), y.p.m ()});
+            return sqrt (abs (math::pack2d{y.x.m (), y.p.m ()}));
         }
     };
 
     double operator() (const state &err, const state & /*y*/,
                        const state &dy) const
     {
+#if 0
+        norm n_dy{dy}, n_err{err};
+
+        std::cerr << "norm  dy rv "            //
+                  << double(n_dy.rv[0]) << " " //
+                  << double(n_dy.rv[1]) << " " //
+                  << double(n_dy.rv[2]) << " " //
+                  << double(n_dy.rv[3]) << "\n"
+                  << "          m "           //
+                  << double(n_dy.m[0]) << " " //
+                  << double(n_dy.m[1]) << "\n";
+        std::cerr << "norm err rv "             //
+                  << double(n_err.rv[0]) << " " //
+                  << double(n_err.rv[1]) << " " //
+                  << double(n_err.rv[2]) << " " //
+                  << double(n_err.rv[3]) << "\n"
+                  << "          m "            //
+                  << double(n_err.m[0]) << " " //
+                  << double(n_err.m[1]) << "\n";
+
+        std::cout << "dy / err " << hmin (norm (dy) / norm (err)) << "\n";
+#endif
+
         return hmin (abs ((atol + rtol * norm (dy)) / norm (err)));
         // return rsqrt (hadd (square (norm (err) / (atol + rtol * norm
         // (dy)))));

@@ -20,11 +20,16 @@ CXX = clang++
 	do_test_pack_x64 do_test_pack_avx do_test_pack_fma \
 	do_test_vect_x64 do_test_vect_avx do_test_vect_fma 
 
-default: dp_exp.exe dp_orbit.exe dp_swich.exe
+default: dp_exp.exe dp_orbit.exe dp_swich.exe root.exe opt2d.exe
+
+
+opt2d.exe: opt2d.o config.o
 
 dp_exp.exe: dp_exp.o
 dp_orbit.exe: dp_orbit.o
 dp_swich.exe: dp_swich.o
+
+root.exe: root.o
 
 
 test_math: test_vect test_pack
