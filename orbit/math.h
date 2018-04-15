@@ -112,6 +112,7 @@ template <typename N, typename T> struct operators {
     struct M {
         N a, b;
         operator T () const { return a * b; }
+        explicit operator N () const { return a * b; }
     };
 
     // clang-format off
@@ -246,6 +247,7 @@ struct scalar : detail::operators<double, scalar> {
     explicit operator double () const { return v; }
 
     friend scalar sign (scalar a) { return sign (a.v); }
+    friend scalar log (scalar a) { return std::log (a.v); }
 
     // clang-format off
     friend bool operator== (scalar a, scalar b) { return a.v == b.v; }
@@ -410,6 +412,7 @@ struct vect3d {
     friend vect3d operator*= (vect3d &a, scalar b) { return a = a * b; }
     friend vect3d operator+= (vect3d &a, vect3d b) { return a = a + b; }
     friend vect3d operator-= (vect3d &a, vect3d b) { return a = a - b; }
+    friend vect3d operator/= (vect3d &a, scalar b) { return a = a / b; }
 
   private:
     static v4d yzx (v4d a) { return {a[1], a[2], a[0], a[3]}; }

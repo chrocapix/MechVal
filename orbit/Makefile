@@ -10,6 +10,9 @@ CXXFLAGS += -O3
 CXXFLAGS += -mavx2
 CXXFLAGS += -mfma
 
+CXXFLAGS += -I/usr/local/nlopt-2.4.2/include
+LDFLAGS += -L/usr/local/nlopt-2.4.2/lib
+LIBS += -lnlopt
 
 CXX = clang++
  LD = clang++

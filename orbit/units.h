@@ -14,6 +14,7 @@ struct units {
     struct len_accel_mass {
     };
 
+    units () = default;
     units (len_accel_mass, double len, double accel, double mass)
         : mass{mass}
         , length{len}

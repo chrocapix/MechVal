@@ -24,22 +24,17 @@ template <typename ship> struct simulator {
         double d_swich;
     };
 
-    simulator (const ship &s, const ship_state &y0, double t0, double tf)
+    simulator (const ship &s)
         : ode{s.f, s.e}
         , root{1e-7}
         , force_throttle{false}
     {
-        ode.init (s0, y0, t0, tf, 0.);
-        update (s0, 0.);
-        if (s0.u != 0.) {
-            ode.init (s0, y0, t0, tf, s0.u);
-            update (s0, s0.u);
-        }
-        // s1.u = s0.u;
-        set_t_final (tf);
-        ode_step (s1, s0);
+    }
 
-        adjust (s0, s1);
+    simulator (const ship &s, const ship_state &y0, double t0, double tf)
+        : simulator{s}
+    {
+        init (y0, t0, tf);
     }
 
     simulator (const ship &s, const ship_state &y0, double t0, double tf,
@@ -54,6 +49,28 @@ template <typename ship> struct simulator {
         ode_step (s1, s0);
 
         adjust (s0, s1);
+    }
+
+    void init (const ship_state &y0, double t0, double tf)
+    {
+        ode.init (s0, y0, t0, tf, 0.);
+        update (s0, 0.);
+        if (s0.u != 0.) {
+            ode.init (s0, y0, t0, tf, s0.u);
+            update (s0, s0.u);
+        }
+        // s1.u = s0.u;
+        set_t_final (tf);
+        ode_step (s1, s0);
+
+        adjust (s0, s1);
+    }
+
+    ship_state pm_for_swich (const ship_state &y0, double swich)
+    {
+        ship_state y = y0;
+        y.p.set_m (ode.f.pm_for_swich (y0, swich));
+        return y;
     }
 
     void set_t_final (double tf) { ode.t_final = tf; }
