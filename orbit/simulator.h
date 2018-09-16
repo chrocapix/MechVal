@@ -22,6 +22,7 @@ template <typename ship> struct simulator {
 
         double swich;
         double d_swich;
+        double r_dot_v;
     };
 
     simulator (const ship &s)
@@ -43,6 +44,13 @@ template <typename ship> struct simulator {
         , root{1e-7}
         , force_throttle{true}
     {
+        init (y0, t0, tf, u);
+    }
+
+    void init (const ship_state &y0, double t0, double tf, double u)
+    {
+        force_throttle = true;
+        s0.u           = u;
         ode.init (s0, y0, t0, tf, u);
         update (s0, u);
         set_t_final (tf);
@@ -53,6 +61,7 @@ template <typename ship> struct simulator {
 
     void init (const ship_state &y0, double t0, double tf)
     {
+        force_throttle = false;
         ode.init (s0, y0, t0, tf, 0.);
         update (s0, 0.);
         if (s0.u != 0.) {
@@ -84,9 +93,12 @@ template <typename ship> struct simulator {
     {
         ode_step (s2, s1);
 
-        if (math::abs (s0.swich) > swich_epsilon     //
-            || math::abs (s1.swich) > swich_epsilon  //
-            || math::abs (s2.swich) > swich_epsilon) //
+        if (math::abs (s0.swich) > swich_epsilon    //
+            || math::abs (s1.swich) > swich_epsilon //
+            || math::abs (s2.swich) > swich_epsilon
+            || math::abs (s0.r_dot_v) > swich_epsilon
+            || math::abs (s1.r_dot_v) > swich_epsilon
+            || math::abs (s2.r_dot_v) > swich_epsilon) //
         {
             adjust (s1, s2);
         }
@@ -115,8 +127,9 @@ template <typename ship> struct simulator {
     {
         adjust (sa, sb, &state::d_swich);
         adjust (sa, sb, &state::swich);
+        adjust (sa, sb, &state::r_dot_v);
         if (sb.u != sa.u) {
-            std::cerr << "throttle change: re evaluating derivative\n";
+            // std::cerr << "throttle change: re evaluating derivative\n";
             sb.dy = ode.f (sb.t, sb.y, sb.u);
         }
     }
@@ -146,15 +159,16 @@ template <typename ship> struct simulator {
     {
         ode.step (sb, sa);
         update (sb, sa.u);
+        if (force_throttle) return;
         if (sb.swich > swich_epsilon && sa.u == 0.) {
             sa.u = 1.;
-            std::cerr << "retrying u = 1 at t = " << sa.t << "\n";
+            // std::cerr << "retrying u = 1 at t = " << sa.t << "\n";
             sa.dy = ode.f (sa.t, sa.y, sa.u);
             ode.step (sb, sa);
             update (sb, sa.u);
         } else if (sb.swich < swich_epsilon && sa.u == 1.) {
             sa.u = 0.;
-            std::cerr << "retrying u = 0 at t = " << sa.t << "\n";
+            // std::cerr << "retrying u = 0 at t = " << sa.t << "\n";
             sa.dy = ode.f (sa.t, sa.y, sa.u);
             ode.step (sb, sa);
             update (sb, sa.u);
@@ -164,15 +178,16 @@ template <typename ship> struct simulator {
     {
         ode.force_step (sb, sa, tb);
         update (sb, sa.u);
+        if (force_throttle) return;
         if (sb.swich > swich_epsilon && sa.u == 0.) {
             sa.u = 1.;
-            std::cerr << "retrying u = 1 at t = " << sa.t << "\n";
+            // std::cerr << "retrying u = 1 at t = " << sa.t << "\n";
             sa.dy = ode.f (sa.t, sa.y, sa.u);
             ode.force_step (sb, sa, tb);
             update (sb, sa.u);
         } else if (sb.swich < swich_epsilon && sa.u == 1.) {
             sa.u = 0.;
-            std::cerr << "retrying u = 0 at t = " << sa.t << "\n";
+            // std::cerr << "retrying u = 0 at t = " << sa.t << "\n";
             sa.dy = ode.f (sa.t, sa.y, sa.u);
             ode.force_step (sb, sa, tb);
             update (sb, sa.u);
@@ -183,6 +198,7 @@ template <typename ship> struct simulator {
     {
         sb.swich   = ode.f.swich (sb.y);
         sb.d_swich = ode.f.d_swich (sb.y);
+        sb.r_dot_v = double(sb.y.x.r () * sb.y.x.v ());
 
         if (force_throttle)
             sb.u = u;
@@ -195,8 +211,9 @@ template <typename ship> struct simulator {
         else if (sb.d_swich < 0)
             sb.u = 0.;
         else {
-            std::cerr << "warning: guessing thottle " << u << " at t = " << sb.t
-                      << "\n";
+            // std::cerr << "warning: guessing thottle " << u << " at t = " <<
+            // sb.t
+            //<< "\n";
             sb.u = u;
         }
     }

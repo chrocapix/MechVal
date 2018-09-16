@@ -12,7 +12,8 @@ CXXFLAGS += -mfma
 
 CXXFLAGS += -I/usr/local/nlopt-2.4.2/include
 LDFLAGS += -L/usr/local/nlopt-2.4.2/lib
-LIBS += -lnlopt
+LIBS += -lnlopt -lgsl -lgslcblas
+
 
 CXX = clang++
  LD = clang++
@@ -27,6 +28,7 @@ default: dp_exp.exe dp_orbit.exe dp_swich.exe root.exe opt2d.exe
 
 
 opt2d.exe: opt2d.o config.o
+opt3d.exe: opt3d.o config.o
 
 dp_exp.exe: dp_exp.o
 dp_orbit.exe: dp_orbit.o

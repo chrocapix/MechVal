@@ -9,7 +9,7 @@ struct root {
     root (double tol = 1e-9)
         : tol{tol_corrected (tol)}
     {
-        std::cerr << "root tol " << this->tol << "\n";
+        // std::cerr << "root tol " << this->tol << "\n";
     }
 
     static double tol_corrected (double tol)
@@ -62,7 +62,7 @@ struct root {
         // std::cerr << "u = " << u << "\n";
 
         double x = .5 * ((1. + u) * x1 + (1. - u) * x0);
-        std::cerr << "x = " << x << " f (x) = " << f (x) << "\n";
+        // std::cerr << "x = " << x << " f (x) = " << f (x) << "\n";
 
         return x;
     }

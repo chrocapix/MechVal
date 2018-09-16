@@ -409,6 +409,11 @@ struct vect3d {
     {
         return mulsub (yzx (a.v), zxy (b.v), yzx (b.v) * zxy (a.v));
     }
+    friend scalar angle (vect3d a, vect3d b)
+    {
+        return atan2 (double(sqrt (square (a ^ b))), double(a * b));
+    }
+
     friend vect3d operator*= (vect3d &a, scalar b) { return a = a * b; }
     friend vect3d operator+= (vect3d &a, vect3d b) { return a = a + b; }
     friend vect3d operator-= (vect3d &a, vect3d b) { return a = a - b; }
